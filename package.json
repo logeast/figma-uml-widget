@@ -1,0 +1,17 @@
+{
+  "name": "figtable",
+  "version": "1.0.0",
+  "description": "A Figjam widget to create UML diagram.",
+  "main": "src/code.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json -w"
+  },
+  "author": "Arthur Fontaine",
+  "license": "MIT",
+  "devDependencies": {
+    "@figma/plugin-typings": "*",
+    "@figma/widget-typings": "*",
+    "typescript": "*"
+  }
+}

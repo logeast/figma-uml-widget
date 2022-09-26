@@ -1,0 +1,11 @@
+{
+  "name": "Figtable",
+  "id": "1115755436385457066",
+  "api": "1.0.0",
+  "main": "src/code.js",
+  "editorType": [
+    "figjam"
+  ],
+  "containsWidget": true,
+  "widgetApi": "1.0.0"
+}
