@@ -1,5 +1,24 @@
 const { widget } = figma;
 const { useSyncedState, usePropertyMenu, AutoLayout, Input, Frame } = widget;
+const genId = (() => {
+  let id = 0;
+  return () => (++id).toString();
+})();
+interface Table {
+  name: string;
+  columns: Column[];
+}
+
+interface Column {
+  id: string;
+  name: string;
+  type: string;
+  marker: string;
+  /**
+   * Primary key or foreign key.
+   */
+  key: string;
+}
 
 type ColorType = { name: string; value: string };
 
@@ -27,15 +46,15 @@ function genColor(name: typeof colors[number]["name"]) {
 }
 
 function Widget() {
-  const [table, setTable] = useSyncedState<Database.Table>("tables", {
+  const [table, setTable] = useSyncedState<Table>("tables", {
     name: "",
-    columns: [],
+    columns: [{ id: genId(), name: "", type: "", marker: "", key: "" }],
   });
   const [selectedColor, setSelectedColor] = useSyncedState<ColorType>(
     "selectedColor",
     genColor("Light Green")
   );
-  const [selectedColumn, setSelectedColumn] = useSyncedState<Database.Column>(
+  const [selectedColumn, setSelectedColumn] = useSyncedState<Column>(
     "selectedColumn",
     null
   );
@@ -51,10 +70,18 @@ function Widget() {
     });
   };
 
+  const getSelectedColumn = (index: number) => {
+    setSelectedColumn(table.columns.find((column, i) => i === index));
+  };
+
   const addColumn = () => {
+    genId();
     setTable({
       ...table,
-      columns: [...table.columns, { name: "", type: "", marker: "", key: "" }],
+      columns: [
+        ...table.columns,
+        { id: genId(), name: "", type: "", marker: "", key: "" },
+      ],
     });
   };
 
@@ -66,7 +93,9 @@ function Widget() {
   };
 
   const upColumn = (index: number) => {
-    if (index === 0) {
+    console.log(index);
+
+    if (index <= 0) {
       return;
     }
 
@@ -144,54 +173,49 @@ function Widget() {
         propertyName: "selectedColor",
       },
       {
+        itemType: "separator",
+      },
+      {
         itemType: "action",
         propertyName: "addColumn",
-        tooltip: "Add column",
+        tooltip: "Add new column",
+        icon: `<svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 2.25V9.75M9.75 6H2.25" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`,
       },
-      // @ts-ignore
-      ...(table.columns.length > 0
-        ? [
-            {
-              itemType: "separator",
-            },
-            {
-              itemType: "dropdown",
-              propertyName: "selectColumn",
-              options: table.columns.map((column, index) => ({
-                option: column.name,
-                label: column.name,
-              })),
-              tooltip: "Select column",
-              selectedOption: selectedColumn
-                ? selectedColumn.name
-                : table.columns[table.columns.length - 1].name,
-            },
-            {
-              itemType: "action",
-              propertyName: "removeColumn",
-              tooltip: "Remove column",
-            },
-            {
-              itemType: "action",
-              propertyName: "upColumn",
-              tooltip: "↑",
-            },
-            {
-              itemType: "action",
-              propertyName: "downColumn",
-              tooltip: "↓",
-            },
-            {
-              itemType: "link",
-              propertyName: "autoLayout",
-              tooltip: `Star and Sponsor`,
-              href: "https://github.com/logeast/figjam-uml",
-              icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10.5 3.75L6 1.125L1.5 3.75M10.5 3.75L6 6.375M10.5 3.75V8.25L6 10.875M1.5 3.75L6 6.375M1.5 3.75V8.25L6 10.875M6 6.375V10.875" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+      {
+        itemType: "action",
+        propertyName: "removeColumn",
+        tooltip: "Remove selected column",
+        icon: `<svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.75 6H2.25" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>`,
-            },
-          ]
-        : []),
+      },
+      {
+        itemType: "separator",
+      },
+      {
+        itemType: "action",
+        propertyName: "upColumn",
+        tooltip: "↑",
+      },
+      {
+        itemType: "action",
+        propertyName: "downColumn",
+        tooltip: "↓",
+      },
+      {
+        itemType: "separator",
+      },
+      {
+        itemType: "link",
+        propertyName: "starAndSponsor",
+        tooltip: `Star and Sponsor`,
+        href: "https://github.com/logeast/figjam-uml",
+        icon: `<svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.5 4.125C10.5 2.8825 9.4505 1.875 8.156 1.875C7.1885 1.875 6.3575 2.438 6 3.2415C5.6425 2.438 4.8115 1.875 3.8435 1.875C2.55 1.875 1.5 2.8825 1.5 4.125C1.5 7.735 6 10.125 6 10.125C6 10.125 10.5 7.735 10.5 4.125Z" stroke="#EC4899" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>`,
+      },
     ],
     ({ propertyName, propertyValue }) => {
       if (propertyName === "selectedColor") {
@@ -199,6 +223,7 @@ function Widget() {
           colors.filter((color) => color.value === propertyValue)[0]
         );
       } else if (propertyName === "addColumn") {
+        genId();
         addColumn();
       } else if (propertyName === "selectColumn") {
         setSelectedColumn(
@@ -232,9 +257,6 @@ function Widget() {
       cornerRadius={{ topLeft: 5, topRight: 5 }}
       width={360}
       height={"hug-contents"}
-      onClick={(e) => {
-        console.log("e", e);
-      }}
     >
       <AutoLayout
         direction={"horizontal"}
@@ -260,7 +282,7 @@ function Widget() {
       <AutoLayout
         direction="vertical"
         width={"fill-parent"}
-        stroke={genColor("Light Gray").value}
+        stroke={selectedColor.value}
         strokeWidth={1}
         strokeAlign={"inside"}
       >
@@ -273,7 +295,7 @@ function Widget() {
             width={"fill-parent"}
             padding={{ horizontal: 10, vertical: 7 }}
             verticalAlignItems={"center"}
-            stroke={genColor("Light Gray").value}
+            stroke={selectedColor.value}
             strokeWidth={1}
             strokeAlign={"center"}
           >
@@ -285,6 +307,7 @@ function Widget() {
               fontWeight={"normal"}
               width={"fill-parent"}
               fill={"#000000"}
+              onClick={() => getSelectedColumn(index)}
               onTextEditEnd={({ characters }) =>
                 changeColumnName(index, characters)
               }
@@ -297,6 +320,7 @@ function Widget() {
               fontWeight={"normal"}
               width={105}
               fill={selectedColor.value}
+              onClick={() => getSelectedColumn(index)}
               onTextEditEnd={({ characters }) =>
                 changeColumnType(index, characters)
               }
@@ -308,6 +332,7 @@ function Widget() {
               fontWeight={"normal"}
               width={35}
               fill={"#000000"}
+              onClick={() => getSelectedColumn(index)}
               onTextEditEnd={({ characters }) =>
                 changeColumnMarker(index, characters)
               }
@@ -320,9 +345,9 @@ function Widget() {
               verticalAlignItems={"center"}
               fill={
                 column.key.toUpperCase() === "PK"
-                  ? "#F9D745"
+                  ? selectedColor.value
                   : column.key.toUpperCase() === "FK"
-                  ? "#C87ACD"
+                  ? genColor("Light Gray").value
                   : ""
               }
               cornerRadius={9999}
@@ -342,6 +367,7 @@ function Widget() {
                 textCase={"upper"}
                 horizontalAlignText={"center"}
                 verticalAlignText={"center"}
+                onClick={() => getSelectedColumn(index)}
                 onTextEditEnd={({ characters }) =>
                   changeColumnKey(index, characters)
                 }

@@ -1,6 +1,6 @@
 # FigJam UML Table
 
-This widget is to create a UML diagram for FigJam or Figma. It is inspired by the [UML Diagrams template](https://www.figma.com/community/file/999008812984283340) and forked from [arthur-fontaine/figtable](https://github.com/arthur-fontaine/figtable).
+This widget is to create a UML table (class) diagram for FigJam or Figma. It is inspired by the [UML Diagrams template](https://www.figma.com/community/file/999008812984283340) and forked from [arthur-fontaine/figtable](https://github.com/arthur-fontaine/figtable).
 
 ## Extend with Figtable
 

@@ -9,5 +9,6 @@ declare namespace Database {
         type: string;
         marker: string;
         key: string;
+        selected?: boolean;
     }
 }
