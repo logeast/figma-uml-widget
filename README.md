@@ -1,6 +1,6 @@
 # FigJam UML Table
 
-This widget is to create a UML table (class) diagram for FigJam or Figma. It is inspired by the [UML Diagrams template](https://www.figma.com/community/file/999008812984283340) and forked from [arthur-fontaine/figtable](https://github.com/arthur-fontaine/figtable).
+This widget is to create a UML table (class) diagram for FigJam or Figma. It is inspired by the [UML Diagrams template](https://www.figma.com/community/file/999008812984283340).
 
 ## More Feature, more custom!
 
@@ -24,4 +24,4 @@ To modelize relational database directly in Figjam.
 
 ## LICENSE
 
-The project is open-source under [MIT license](./LICENSE). Find the code here: https://github.com/logeast/figjam-uml.
+The project is open-source under [MIT license](./LICENSE). This project is forked from [arthur-fontaine/figtable] and you can find the code here: https://github.com/logeast/figjam-uml.
