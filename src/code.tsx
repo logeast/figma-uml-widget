@@ -181,6 +181,15 @@ function Widget() {
               propertyName: "downColumn",
               tooltip: "↓",
             },
+            {
+              itemType: "link",
+              propertyName: "autoLayout",
+              tooltip: `Star and Sponsor`,
+              href: "https://github.com/logeast/figjam-uml",
+              icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.5 3.75L6 1.125L1.5 3.75M10.5 3.75L6 6.375M10.5 3.75V8.25L6 10.875M1.5 3.75L6 6.375M1.5 3.75V8.25L6 10.875M6 6.375V10.875" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>`,
+            },
           ]
         : []),
     ],

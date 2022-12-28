@@ -1,8 +1,8 @@
-# FigJam UML Diagrams
+# FigJam UML Table
 
 This widget is to create a UML diagram for FigJam or Figma. It is inspired by the [UML Diagrams template](https://www.figma.com/community/file/999008812984283340) and forked from [arthur-fontaine/figtable](https://github.com/arthur-fontaine/figtable).
 
-## Compared with Figtable?
+## Extend with Figtable
 
 Insert the widget, and in the widget menu you can:
 
@@ -13,10 +13,13 @@ Insert the widget, and in the widget menu you can:
 
 More Feature, more custom!
 
-- 🎉 Custom header background color
-- 🎉 Add an emoji icon before header title
-- 🎉 Connector every rows to other table or rows
-- 🎉 Generate table from code scripts
+- [x] 🎉 A total of 15 theme colors
+- [x] 🎉 Add an emoji icon before header title
+- [ ] 🎉 Add and Remove column friendly
+- [ ] 🎉 Delicater Property Menu
+- [ ] 🎉 Generate table from code scripts
+- [ ] 🎉 Copy table markup language quickly
+- [ ] 🎉 Connector every rows to other table or rows, it is too head to realize, I'm so sorry...
 
 ---
 
