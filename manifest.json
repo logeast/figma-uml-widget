@@ -4,6 +4,7 @@
   "api": "1.0.0",
   "main": "src/code.js",
   "editorType": [
+    "figma",
     "figjam"
   ],
   "containsWidget": true,
