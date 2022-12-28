@@ -1,0 +1,31 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@figma/plugin-typings': '*'
+  '@figma/widget-typings': '*'
+  typescript: '*'
+
+devDependencies:
+  '@figma/plugin-typings': 1.57.1
+  '@figma/widget-typings': 1.5.0_tj4xhekr24a2hc4p7qizthcxxi
+  typescript: 4.9.4
+
+packages:
+
+  /@figma/plugin-typings/1.57.1:
+    resolution: {integrity: sha512-kwiuApuqgkIPbFKey459VspenqXlBcBoMTnTZdQ/Hk2N71BTOZ0cM5Xq3zbPW/bEQOYtGDpweWxcXYHLo19HxQ==}
+    dev: true
+
+  /@figma/widget-typings/1.5.0_tj4xhekr24a2hc4p7qizthcxxi:
+    resolution: {integrity: sha512-gktog9TSdFpFIu3mEK3e8EsAUhBOmfVzHVMACR/0DRCneXUNaFyQnr/0Layg6BvAUyYzcYv8jT7Oe2e7GHIQ4g==}
+    peerDependencies:
+      '@figma/plugin-typings': 1.x
+    dependencies:
+      '@figma/plugin-typings': 1.57.1
+    dev: true
+
+  /typescript/4.9.4:
+    resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true

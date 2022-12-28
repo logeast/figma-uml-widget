@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.json",
     "watch": "tsc -p tsconfig.json -w"
   },
-  "author": "Arthur Fontaine",
+  "author": "logeast",
   "license": "MIT",
   "devDependencies": {
     "@figma/plugin-typings": "*",
