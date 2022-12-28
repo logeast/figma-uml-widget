@@ -1,5 +1,5 @@
 const { widget } = figma;
-const { useSyncedState, usePropertyMenu, AutoLayout, Input } = widget;
+const { useSyncedState, usePropertyMenu, AutoLayout, Input, Frame } = widget;
 
 type ColorType = { name: string; value: string };
 
@@ -22,7 +22,7 @@ const colors: ColorType[] = [
   { name: "Light Pink", value: "#F472B6" },
 ];
 
-function genColorValue(name: typeof colors[number]["name"]) {
+function genColor(name: typeof colors[number]["name"]) {
   return colors.filter((color) => color.name === name)[0];
 }
 
@@ -31,9 +31,9 @@ function Widget() {
     name: "",
     columns: [],
   });
-  const [headerColor, setHeaderColor] = useSyncedState<ColorType>(
-    "headerColor",
-    genColorValue("Light Green")
+  const [selectedColor, setSelectedColor] = useSyncedState<ColorType>(
+    "selectedColor",
+    genColor("Light Green")
   );
   const [selectedColumn, setSelectedColumn] = useSyncedState<Database.Column>(
     "selectedColumn",
@@ -41,9 +41,7 @@ function Widget() {
   );
 
   const changeHeaderColor = (color: ColorType) => {
-    console.log("color", color);
-
-    setHeaderColor(color);
+    setSelectedColor(color);
   };
 
   const changeTableName = (name: string) => {
@@ -56,10 +54,7 @@ function Widget() {
   const addColumn = () => {
     setTable({
       ...table,
-      columns: [
-        ...table.columns,
-        { name: "", type: "string", marker: "", key: "" },
-      ],
+      columns: [...table.columns, { name: "", type: "", marker: "", key: "" }],
     });
   };
 
@@ -144,9 +139,9 @@ function Widget() {
           tooltip: color.name,
           option: color.value,
         })),
-        selectedOption: headerColor.value,
+        selectedOption: selectedColor.value,
         tooltip: "Table Header Color",
-        propertyName: "headerColor",
+        propertyName: "selectedColor",
       },
       {
         itemType: "action",
@@ -189,10 +184,8 @@ function Widget() {
           ]
         : []),
     ],
-    ({ propertyName, propertyValue, ...others }) => {
-      console.log({ propertyName, propertyValue, ...others });
-
-      if (propertyName === "headerColor") {
+    ({ propertyName, propertyValue }) => {
+      if (propertyName === "selectedColor") {
         changeHeaderColor(
           colors.filter((color) => color.value === propertyValue)[0]
         );
@@ -230,11 +223,14 @@ function Widget() {
       cornerRadius={{ topLeft: 5, topRight: 5 }}
       width={360}
       height={"hug-contents"}
+      onClick={(e) => {
+        console.log("e", e);
+      }}
     >
       <AutoLayout
         direction={"horizontal"}
         padding={{ horizontal: 10, vertical: 7 }}
-        fill={headerColor.value}
+        fill={selectedColor.value}
         horizontalAlignItems={"start"}
         verticalAlignItems={"center"}
         width={"fill-parent"}
@@ -243,6 +239,7 @@ function Widget() {
         <Input
           placeholder="Table Name"
           value={table.name}
+          width="fill-parent"
           fontFamily={"Work Sans"}
           fontSize={16}
           fontWeight={"semi-bold"}
@@ -254,7 +251,7 @@ function Widget() {
       <AutoLayout
         direction="vertical"
         width={"fill-parent"}
-        stroke={"#CCCCCC"}
+        stroke={genColor("Light Gray").value}
         strokeWidth={1}
         strokeAlign={"inside"}
       >
@@ -267,7 +264,7 @@ function Widget() {
             width={"fill-parent"}
             padding={{ horizontal: 10, vertical: 7 }}
             verticalAlignItems={"center"}
-            stroke={"#CCCCCC"}
+            stroke={genColor("Light Gray").value}
             strokeWidth={1}
             strokeAlign={"center"}
           >
@@ -290,7 +287,7 @@ function Widget() {
               fontSize={14}
               fontWeight={"normal"}
               width={105}
-              fill={"#F17400"}
+              fill={selectedColor.value}
               onTextEditEnd={({ characters }) =>
                 changeColumnType(index, characters)
               }
