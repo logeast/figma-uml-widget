@@ -1,5 +1,5 @@
 {
-  "name": "figtable",
+  "name": "figjam-uml",
   "version": "1.0.0",
   "description": "A Figjam widget to create UML diagram.",
   "main": "src/code.js",
