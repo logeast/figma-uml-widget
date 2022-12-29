@@ -1,16 +1,12 @@
 const { widget } = figma;
-const { useSyncedState, usePropertyMenu, AutoLayout, Input, Frame } = widget;
-const genId = (() => {
-  let id = 0;
-  return () => (++id).toString();
-})();
+const { useSyncedState, usePropertyMenu, AutoLayout, Input, useEffect } =
+  widget;
 interface Table {
   name: string;
   columns: Column[];
 }
 
 interface Column {
-  id: string;
   name: string;
   type: string;
   marker: string;
@@ -41,6 +37,11 @@ const colors: ColorType[] = [
   { name: "Light Pink", value: "#F472B6" },
 ];
 
+/**
+ * Generate Color from color's name
+ * @param name
+ * @returns ColorType
+ */
 function genColor(name: typeof colors[number]["name"]) {
   return colors.filter((color) => color.name === name)[0];
 }
@@ -48,7 +49,7 @@ function genColor(name: typeof colors[number]["name"]) {
 function Widget() {
   const [table, setTable] = useSyncedState<Table>("tables", {
     name: "",
-    columns: [{ id: genId(), name: "", type: "", marker: "", key: "" }],
+    columns: [{ name: "", type: "", marker: "", key: "" }],
   });
   const [selectedColor, setSelectedColor] = useSyncedState<ColorType>(
     "selectedColor",
@@ -58,6 +59,12 @@ function Widget() {
     "selectedColumn",
     null
   );
+
+  useEffect(() => {
+    figma.ui.onmessage = (message) => {
+      setTable(message.tableData);
+    };
+  });
 
   const changeHeaderColor = (color: ColorType) => {
     setSelectedColor(color);
@@ -75,13 +82,9 @@ function Widget() {
   };
 
   const addColumn = () => {
-    genId();
     setTable({
       ...table,
-      columns: [
-        ...table.columns,
-        { id: genId(), name: "", type: "", marker: "", key: "" },
-      ],
+      columns: [...table.columns, { name: "", type: "", marker: "", key: "" }],
     });
   };
 
@@ -93,8 +96,6 @@ function Widget() {
   };
 
   const upColumn = (index: number) => {
-    console.log(index);
-
     if (index <= 0) {
       return;
     }
@@ -121,6 +122,18 @@ function Widget() {
     setTable({
       ...table,
       columns,
+    });
+  };
+
+  const editCode = () => {
+    return new Promise((resolve) => {
+      figma.showUI(__html__, {
+        width: 400,
+        height: 360,
+        title: "UML Table Code Editor",
+        themeColors: true,
+      });
+      figma.ui.postMessage({ tableData: table, selectedColor });
     });
   };
 
@@ -197,12 +210,37 @@ function Widget() {
       {
         itemType: "action",
         propertyName: "upColumn",
-        tooltip: "↑",
+        tooltip: "Move up column",
+        icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.25 5.25L6 1.5M6 1.5L9.75 5.25M6 1.5V10.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>`,
       },
       {
         itemType: "action",
         propertyName: "downColumn",
-        tooltip: "↓",
+        tooltip: "Move down column",
+        icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.75 6.75L6 10.5M6 10.5L2.25 6.75M6 10.5V1.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>`,
+      },
+      {
+        itemType: "separator",
+      },
+      {
+        itemType: "action",
+        propertyName: "editCode",
+        tooltip: "Edit source code",
+        icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.125 4.875L8.25 6L7.125 7.125M4.875 7.125L3.75 6L4.875 4.875M3 10.125H9C9.29837 10.125 9.58452 10.0065 9.7955 9.7955C10.0065 9.58452 10.125 9.29837 10.125 9V3C10.125 2.70163 10.0065 2.41548 9.7955 2.2045C9.58452 1.99353 9.29837 1.875 9 1.875H3C2.70163 1.875 2.41548 1.99353 2.2045 2.2045C1.99353 2.41548 1.875 2.70163 1.875 3V9C1.875 9.29837 1.99353 9.58452 2.2045 9.7955C2.41548 10.0065 2.70163 10.125 3 10.125Z" stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>`,
+      },
+      {
+        itemType: "action",
+        propertyName: "copyCode",
+        tooltip: "Copy source code",
+        icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.125 3.75V3.054C4.125 2.4865 4.5475 2.005 5.113 1.958C5.2995 1.943 5.487 1.9295 5.6745 1.918M7.875 9H9C9.29837 9 9.58452 8.88147 9.7955 8.6705C10.0065 8.45952 10.125 8.17337 10.125 7.875V3.054C10.125 2.4865 9.7025 2.005 9.137 1.958C8.94999 1.94249 8.76281 1.92916 8.5755 1.918M7.875 9.375V8.4375C7.875 7.98995 7.69721 7.56073 7.38074 7.24426C7.06427 6.92779 6.63505 6.75 6.1875 6.75H5.4375C5.28832 6.75 5.14524 6.69074 5.03975 6.58525C4.93426 6.47976 4.875 6.33668 4.875 6.1875V5.4375C4.875 4.98995 4.69721 4.56073 4.38074 4.24426C4.06427 3.92779 3.63505 3.75 3.1875 3.75H2.625M8.575 1.918C8.50399 1.68835 8.36131 1.48747 8.16787 1.34477C7.97443 1.20207 7.74038 1.12506 7.5 1.125H6.75C6.50962 1.12506 6.27557 1.20207 6.08213 1.34477C5.88869 1.48747 5.74601 1.68835 5.675 1.918M8.575 1.918C8.6075 2.023 8.625 2.1345 8.625 2.25V2.625H5.625V2.25C5.625 2.1345 5.6425 2.023 5.675 1.918M3.375 3.75H2.4375C2.127 3.75 1.875 4.002 1.875 4.3125V10.3125C1.875 10.623 2.127 10.875 2.4375 10.875H7.3125C7.623 10.875 7.875 10.623 7.875 10.3125V8.25C7.875 7.05653 7.40089 5.91193 6.55698 5.06802C5.71307 4.22411 4.56847 3.75 3.375 3.75V3.75Z" stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>`,
       },
       {
         itemType: "separator",
@@ -210,43 +248,51 @@ function Widget() {
       {
         itemType: "link",
         propertyName: "starAndSponsor",
-        tooltip: `Star and Sponsor`,
+        tooltip: `Star or sponsor`,
         href: "https://github.com/logeast/figjam-uml",
         icon: `<svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.5 4.125C10.5 2.8825 9.4505 1.875 8.156 1.875C7.1885 1.875 6.3575 2.438 6 3.2415C5.6425 2.438 4.8115 1.875 3.8435 1.875C2.55 1.875 1.5 2.8825 1.5 4.125C1.5 7.735 6 10.125 6 10.125C6 10.125 10.5 7.735 10.5 4.125Z" stroke="#EC4899" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>`,
       },
     ],
-    ({ propertyName, propertyValue }) => {
-      if (propertyName === "selectedColor") {
-        changeHeaderColor(
-          colors.filter((color) => color.value === propertyValue)[0]
-        );
-      } else if (propertyName === "addColumn") {
-        genId();
-        addColumn();
-      } else if (propertyName === "selectColumn") {
-        setSelectedColumn(
-          table.columns.find((column) => column.name === propertyValue)
-        );
-      } else if (propertyName === "removeColumn") {
-        removeColumn(
-          table.columns.findIndex(
-            (column) => column.name === selectedColumn.name
-          )
-        );
-      } else if (propertyName === "upColumn") {
-        upColumn(
-          table.columns.findIndex(
-            (column) => column.name === selectedColumn.name
-          )
-        );
-      } else if (propertyName === "downColumn") {
-        downColumn(
-          table.columns.findIndex(
-            (column) => column.name === selectedColumn.name
-          )
-        );
+    async ({ propertyName, propertyValue }) => {
+      switch (propertyName) {
+        case "selectedColor":
+          changeHeaderColor(
+            colors.filter((color) => color.value === propertyValue)[0]
+          );
+          break;
+        case "addColumn":
+          addColumn();
+          break;
+        case "removeColumn":
+          removeColumn(
+            table.columns.findIndex(
+              (column) => column.name === selectedColumn.name
+            )
+          );
+          break;
+        case "upColumn":
+          upColumn(
+            table.columns.findIndex(
+              (column) => column.name === selectedColumn.name
+            )
+          );
+          break;
+        case "downColumn":
+          downColumn(
+            table.columns.findIndex(
+              (column) => column.name === selectedColumn.name
+            )
+          );
+          break;
+        case "editCode":
+          await editCode();
+          break;
+        case "copyCode":
+          break;
+        default:
+          break;
       }
     }
   );

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UML Table Code Editor</title>
+    <style>
+      :root {
+        --border-color: rgb(209 213 219);
+        --bg-color: rgb(248 250 252);
+      }
+      textarea:focus-visible,
+      button:focus-visible {
+        outline-color: var(--selected-color);
+      }
+      button {
+        padding: 8px 16px;
+        font-size: 16px;
+        border-color: transparent;
+        border-radius: 8px;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        outline-color: transparent;
+      }
+      button:focus-visible {
+        outline-color: var(--figma-color-border-selected);
+      }
+      .default-button {
+        border-color: var(--border-color);
+        background-color: transparent;
+      }
+      .default-button:hover,
+      .default-button:active {
+        background-color: var(--bg-color);
+        color: var(--selected-color);
+      }
+      .primary-button {
+        border-color: var(--selected-color);
+        background-color: var(--selected-color);
+        color: white;
+      }
+      .primary-button:hover {
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea
+      id="tableCode"
+      placeholder="Please input UML table code"
+      style="
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        width: 100%;
+        resize: vertical;
+        padding: 8px 16px;
+        background-color: var(--bg-color);
+        font-size: 16px;
+        line-height: 1.5;
+      "
+      rows="10"
+    >
+    </textarea>
+    <div
+      style="display: flex; justify-content: center; gap: 16px; margin: 16px"
+    >
+      <button id="format" class="default-button">Format Code</button>
+      <button id="submit" class="primary-button">Generate UML</button>
+    </div>
+    <script>
+      let pluginId = null;
+      onmessage = (event) => {
+        setCode(stringifyTableData(event.data.pluginMessage.tableData));
+        pluginId = event.data.pluginId;
+
+        const textarea = document.getElementById("tableCode");
+        textarea.focus();
+        textarea.placeholder = `The UML Table Sample Code:
+Table Table Name {
+  name, type, marker, key;
+  name, type, marker, key;
+  name, type, marker, key;
+}`;
+        document.documentElement.style.setProperty(
+          "--selected-color",
+          event.data.pluginMessage.selectedColor.value
+        );
+      };
+
+      document.getElementById("submit").onclick = () => {
+        parent.postMessage(
+          {
+            pluginMessage: { tableData: parseTextareaValue(getCode()) },
+            pluginId,
+          },
+          "*"
+        );
+      };
+
+      document.getElementById("format").onclick = () => {
+        setCode(stringifyTableData(parseTextareaValue(getCode())));
+      };
+
+      function getCode() {
+        return document.getElementById("tableCode").value;
+      }
+
+      function setCode(value) {
+        document.getElementById("tableCode").value = value;
+      }
+
+      function stringifyTableData(table) {
+        const stringifiedColumns = table.columns.map((column, index) => {
+          const props = [column.name, column.type, column.marker, column.key];
+          return `  ${props.join(", ")};`;
+        });
+        return `Table ${table.name} {
+${stringifiedColumns.join("\n")}
+}`;
+      }
+
+      function parseTextareaValue(value) {
+        const tableValue = value.trim().split("{");
+        const tableName = tableValue[0].trim().replace(/Table /, "");
+        const tableColumns = tableValue[1]
+          .split("}")[0]
+          .trim()
+          .split("\n")
+          .map((column) => {
+            const props = column
+              .trim()
+              .replace(/;/, "")
+              .split(",")
+              .map((i) => i.trim());
+            return {
+              name: props[0],
+              type: props[1],
+              marker: props[2],
+              key: props[3],
+            };
+          });
+
+        return {
+          name: tableName,
+          columns: tableColumns,
+        };
+      }
+    </script>
+  </body>
+</html>
