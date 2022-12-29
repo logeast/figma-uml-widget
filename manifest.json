@@ -1,6 +1,6 @@
 {
-  "name": "UML Table",
-  "id": "",
+  "name": "UML Table Diagram",
+  "id": "1190104377571373751",
   "api": "1.0.0",
   "main": "src/code.js",
   "editorType": [

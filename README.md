@@ -1,4 +1,4 @@
-# <div style="display:flex; align-items: center; gap: 8px"><a href="" target="_blank"><img src="res/logo.png" alt="screenshot" width="32"></a> FigJam UML Table</div>
+# <div style="display:flex; align-items: center; gap: 8px"><a href="" target="_blank"><img src="res/logo.png" alt="screenshot" width="32"></a> FigJam/Figma UML Table Diagram</div>
 
 This widget is to create a UML table (class) diagram for FigJam or Figma. It is inspired by the [UML Diagrams template](https://www.figma.com/community/file/999008812984283340).
 
