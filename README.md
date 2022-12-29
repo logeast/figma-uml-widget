@@ -1,4 +1,4 @@
-# FigJam UML Table
+# <div style="display:flex; align-items: center; gap: 8px"><a href="" target="_blank"><img src="res/logo.png" alt="screenshot" width="32"></a> FigJam UML Table</div>
 
 This widget is to create a UML table (class) diagram for FigJam or Figma. It is inspired by the [UML Diagrams template](https://www.figma.com/community/file/999008812984283340).
 
@@ -20,7 +20,6 @@ We're actively listening to and prioritizing feedback so this list may change. C
 - 🗄️ Generate table from code scripts
 - 🗄️ Copy table markup language quickly
 - 🗄️ Connector every rows to other table or rows, it is too head to realize, I'm so sorry...
-
 
 <img src="res/cover.png" alt="screenshot" width="100%">
 
