@@ -1,7 +1,7 @@
 {
-  "name": "figjam-uml",
+  "name": "uml-table-diagram",
   "version": "1.0.0",
-  "description": "A Figjam widget to create UML diagram.",
+  "description": "A Figjam/Figma widget to create UML table diagram.",
   "main": "src/code.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
