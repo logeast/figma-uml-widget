@@ -77,7 +77,7 @@
         const textarea = document.getElementById("tableCode");
         textarea.focus();
         textarea.placeholder = `The UML Table Sample Code:
-Table Table Name {
+Table TableName {
   name, type, marker, key;
   name, type, marker, key;
   name, type, marker, key;
@@ -121,6 +121,13 @@ ${stringifiedColumns.join("\n")}
       }
 
       function parseTextareaValue(value) {
+        const defaultColumn = [{ name: "", type: "", marker: "", key: "" }];
+        if (value == "") {
+          return {
+            name: "",
+            columns: defaultColumn,
+          };
+        }
         const tableValue = value.trim().split("{");
         const tableName = tableValue[0].trim().replace(/Table /, "");
         const tableColumns = tableValue[1]
