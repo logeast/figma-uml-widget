@@ -24,4 +24,4 @@ To modelize relational database directly in Figjam.
 
 ## LICENSE
 
-The project is open-source under [MIT license](./LICENSE). This project is forked from [arthur-fontaine/figtable] and you can find the code here: https://github.com/logeast/figjam-uml.
+The project is open-source under [MIT license](./LICENSE). This project is forked from [arthur-fontaine/figtable]() and you can find the code here: https://github.com/logeast/figjam-uml.
