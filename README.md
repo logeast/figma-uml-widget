@@ -21,13 +21,8 @@ We're actively listening to and prioritizing feedback so this list may change. C
 - 🗄️ Copy table markup language quickly
 - 🗄️ Connector every rows to other table or rows, it is too head to realize, I'm so sorry...
 
----
 
 <img src="res/cover.png" alt="screenshot" width="100%">
-
-## Why?
-
-To modelize relational database directly in Figjam.
 
 ## Feedback
 
