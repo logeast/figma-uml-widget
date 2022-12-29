@@ -4,11 +4,11 @@ This widget is to create a UML table (class) diagram for FigJam or Figma. It is 
 
 ## More Feature, more custom!
 
-We're actively listening to and priortizing feedback so this list may change. Currently here is what we plan to support in the wedget.
+We're actively listening to and prioritizing feedback so this list may change. Currently list is what we plan to support in this wedget.
 
 ### Currently Supported
 
-- ✅ Delicater Property Menu
+- ✅ Optimized Property Menu
 - ✅ A total of 15 theme colors
 - ✅ Add and Remove column friendly
 - ✅ Move up or down a column
@@ -29,6 +29,10 @@ We're actively listening to and priortizing feedback so this list may change. Cu
 
 To modelize relational database directly in Figjam.
 
+## Feedback
+
+You can use [GitHub Issues](https://github.com/logeast/figjam-uml/issues) to share your ideas, feedback or bugs on Github.
+
 ## LICENSE
 
-The project is open-source under [MIT license](./LICENSE). This project is forked from [arthur-fontaine/figtable]() and you can find the code here: https://github.com/logeast/figjam-uml.
+The project is open-source under [MIT license](./LICENSE). This project is forked from `arthur-fontaine/figtable` and you can find the code here: https://github.com/logeast/figjam-uml.
