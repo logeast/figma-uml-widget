@@ -4,7 +4,7 @@ This widget is to create a UML table (class) diagram for FigJam or Figma. It is 
 
 ## More Feature, more custom!
 
-We're actively listening to and prioritizing feedback so this list may change. Currently list is what we plan to support in this wedget.
+We're actively listening to and prioritizing feedback so this list may change. Currently list is what we plan to support in this widget.
 
 ### Currently Supported
 
@@ -12,7 +12,7 @@ We're actively listening to and prioritizing feedback so this list may change. C
 - ✅ A total of 15 theme colors
 - ✅ Add and Remove column friendly
 - ✅ Move up or down a column
-- ✅ Each column can have a name, a type, a marker and a key ("PK" and "FK" have a custom color to help to recognize them).
+- ✅ Each column can have a name, a type, a marker and a key ("PK" and "FK" have a custom color to help to recognize them)
 - ✅ Generate table from code scripts
 
 ### Future Extensions
