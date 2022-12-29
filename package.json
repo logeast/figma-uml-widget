@@ -1,6 +1,6 @@
 {
   "name": "uml-table-diagram",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A Figjam/Figma widget to create UML table diagram.",
   "main": "src/code.js",
   "scripts": {

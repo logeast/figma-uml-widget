@@ -91,7 +91,10 @@ Table TableName {
       document.getElementById("submit").onclick = () => {
         parent.postMessage(
           {
-            pluginMessage: { tableData: parseTextareaValue(getCode()) },
+            pluginMessage: {
+              tableData: parseTextareaValue(getCode()),
+              tableCode: getCode(),
+            },
             pluginId,
           },
           "*"

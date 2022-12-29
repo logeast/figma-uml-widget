@@ -13,11 +13,11 @@ We're actively listening to and prioritizing feedback so this list may change. C
 - ✅ Add and Remove column friendly
 - ✅ Move up or down a column
 - ✅ Each column can have a name, a type, a marker and a key ("PK" and "FK" have a custom color to help to recognize them).
+- ✅ Generate table from code scripts
 
 ### Future Extensions
 
 - 🗄️ Add an emoji icon before header title
-- 🗄️ Generate table from code scripts
 - 🗄️ Copy table markup language quickly
 - 🗄️ Connector every rows to other table or rows, it is too head to realize, I'm so sorry...
 
