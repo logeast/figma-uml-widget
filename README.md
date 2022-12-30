@@ -2,6 +2,8 @@
 
 This widget is to create a UML table (class) diagram for FigJam or Figma. It is inspired by the [UML Diagrams template](https://www.figma.com/community/file/999008812984283340).
 
+View [this template](https://www.figma.com/file/a1j51Q92OCdRyGmxX9l43i/FigJam%2FFigma-UML-Table-Diagram-Widget?node-id=0%3A1&t=mRt0IU7c7woH84nY-1) and try the widget.
+
 ## More Feature, more custom!
 
 We're actively listening to and prioritizing feedback so this list may change. Currently list is what we plan to support in this widget.

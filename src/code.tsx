@@ -185,7 +185,7 @@ function Widget() {
           option: color.value,
         })),
         selectedOption: selectedColor.value,
-        tooltip: "Table Header Color",
+        tooltip: "Table theme color",
         propertyName: "selectedColor",
       },
       {
