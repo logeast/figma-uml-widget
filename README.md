@@ -21,7 +21,7 @@ We're actively listening to and prioritizing feedback so this list may change. C
 
 - 🗄️ Add an emoji icon before header title
 - 🗄️ Copy table markup language quickly
-- 🗄️ Connector every rows to other table or rows, it is too head to realize, I'm so sorry...
+- 🗄️ Connector every rows to other table or rows, it is not supported in figjam, I'm so sorry...
 
 <img src="res/cover.png" alt="screenshot" width="100%">
 
