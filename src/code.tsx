@@ -65,6 +65,7 @@ function Widget() {
     figma.ui.onmessage = (message) => {
       setTable(message.tableData);
       setTableCode(message.tableCode);
+      figma.closePlugin();
     };
   });
 
@@ -252,7 +253,7 @@ function Widget() {
         itemType: "link",
         propertyName: "starAndSponsor",
         tooltip: `Star or sponsor`,
-        href: "https://github.com/logeast/figjam-uml",
+        href: "https://github.com/logeast/figma-uml-widget",
         icon: `<svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.5 4.125C10.5 2.8825 9.4505 1.875 8.156 1.875C7.1885 1.875 6.3575 2.438 6 3.2415C5.6425 2.438 4.8115 1.875 3.8435 1.875C2.55 1.875 1.5 2.8825 1.5 4.125C1.5 7.735 6 10.125 6 10.125C6 10.125 10.5 7.735 10.5 4.125Z" stroke="#EC4899" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>`,
