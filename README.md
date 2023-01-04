@@ -27,8 +27,8 @@ We're actively listening to and prioritizing feedback so this list may change. C
 
 ## Feedback
 
-You can use [GitHub Issues](https://github.com/logeast/figjam-uml/issues) to share your ideas, feedback or bugs on Github.
+You can use [GitHub Issues](https://github.com/logeast/figma-uml-widget/issues) to share your ideas, feedback or bugs on Github.
 
 ## LICENSE
 
-The project is open-source under [MIT license](./LICENSE). This project is forked from `arthur-fontaine/figtable` and you can find the code here: https://github.com/logeast/figjam-uml.
+The project is open-source under [MIT license](./LICENSE). This project is forked from `arthur-fontaine/figtable` and you can find the code here: https://github.com/logeast/figma-uml-widget.
