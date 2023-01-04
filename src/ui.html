@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UML Table Code Editor</title>
     <style>
-      :root {
-        --border-color: rgb(209 213 219);
-        --bg-color: rgb(248 250 252);
-      }
       textarea:focus-visible,
       button:focus-visible {
         outline-color: var(--selected-color);
@@ -19,6 +15,7 @@
         font-size: 16px;
         border-color: transparent;
         border-radius: 8px;
+        overflow: hidden;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
         outline-color: transparent;
@@ -27,18 +24,19 @@
         outline-color: var(--figma-color-border-selected);
       }
       .default-button {
-        border-color: var(--border-color);
-        background-color: transparent;
+        color: var(--figma-color-text);
+        border-color: var(--figma-color-border);
+        background-color: var(--figma-color-bg);
       }
       .default-button:hover,
       .default-button:active {
-        background-color: var(--bg-color);
+        background-color: var(--figma-color-bg-hover);
         color: var(--selected-color);
       }
       .primary-button {
         border-color: var(--selected-color);
         background-color: var(--selected-color);
-        color: white;
+        color: var(--figma-color-text-onbrand);
       }
       .primary-button:hover {
         opacity: 0.9;
@@ -50,12 +48,13 @@
       id="tableCode"
       placeholder="Please input UML table code"
       style="
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--figma-color-border);
         border-radius: 8px;
         width: 100%;
         resize: vertical;
         padding: 8px 16px;
-        background-color: var(--bg-color);
+        color: var(--figma-color-text);
+        background-color: var(--figma-color-bg-secondary);
         font-size: 16px;
         line-height: 1.5;
       "
