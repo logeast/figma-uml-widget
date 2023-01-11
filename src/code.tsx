@@ -195,7 +195,7 @@ function Widget() {
       {
         itemType: "action",
         propertyName: "addColumn",
-        tooltip: "Add new column",
+        tooltip: "Add new row",
         icon: `<svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
         <path d="M6 2.25V9.75M9.75 6H2.25" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>`,
@@ -203,7 +203,7 @@ function Widget() {
       {
         itemType: "action",
         propertyName: "removeColumn",
-        tooltip: "Remove selected column",
+        tooltip: "Remove selected row",
         icon: `<svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.75 6H2.25" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>`,
@@ -214,7 +214,7 @@ function Widget() {
       {
         itemType: "action",
         propertyName: "upColumn",
-        tooltip: "Move up column",
+        tooltip: "Move up row",
         icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2.25 5.25L6 1.5M6 1.5L9.75 5.25M6 1.5V10.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>`,
@@ -222,7 +222,7 @@ function Widget() {
       {
         itemType: "action",
         propertyName: "downColumn",
-        tooltip: "Move down column",
+        tooltip: "Move down row",
         icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.75 6.75L6 10.5M6 10.5L2.25 6.75M6 10.5V1.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>`,
