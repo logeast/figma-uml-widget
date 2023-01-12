@@ -12,9 +12,9 @@ We're actively listening to and prioritizing feedback so this list may change. C
 
 - ✅ Optimized Property Menu
 - ✅ A total of 15 theme colors
-- ✅ Add and Remove column friendly
-- ✅ Move up or down a column
-- ✅ Each column can have a name, a type, a marker and a key ("PK" and "FK" have a custom color to help to recognize them)
+- ✅ Add and Remove row friendly
+- ✅ Move up or down a row
+- ✅ Each row can have a name, a type, a marker and a key ("PK" and "FK" have a custom color to help to recognize them)
 - ✅ Generate table from code scripts
 
 ### Future Extensions
