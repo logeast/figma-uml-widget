@@ -54,7 +54,7 @@ function Widget() {
   const [tableCode, setTableCode] = useSyncedState("tableCode", "");
   const [selectedColor, setSelectedColor] = useSyncedState<ColorType>(
     "selectedColor",
-    genColor("Light Green")
+    genColor("Light Red")
   );
   const [selectedColumn, setSelectedColumn] = useSyncedState<Column>(
     "selectedColumn",
