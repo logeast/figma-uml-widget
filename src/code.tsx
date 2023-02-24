@@ -350,7 +350,7 @@ function Widget() {
             strokeAlign={"center"}
           >
             <Input
-              placeholder="Column Name"
+              placeholder="Row Name"
               value={column.name}
               fontFamily={"IBM Plex Mono"}
               fontSize={14}
@@ -363,7 +363,7 @@ function Widget() {
               }
             />
             <Input
-              placeholder="Column Type"
+              placeholder="Row Type"
               value={column.type}
               fontFamily={"IBM Plex Mono"}
               fontSize={14}
